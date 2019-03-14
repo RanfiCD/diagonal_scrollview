@@ -13,12 +13,14 @@ class DiagonalScrollView extends StatefulWidget {
   /// The movement is constrained so that the (0, 0) point will not be visible.
   /// Therefore, the values emitted will be always negative or zero.
   final ValueChanged<Offset> onScroll;
+  final bool enableFling;
 
   DiagonalScrollView({
     @required this.child,
     this.maxWidth: double.infinity,
     this.maxHeight: double.infinity,
     this.onScroll,
+    this.enableFling: true,
   }): assert(maxWidth > 0), assert(maxHeight > 0);
 
   @override
@@ -91,7 +93,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     Offset velocity = details.velocity.pixelsPerSecond;
     double distance = velocity.distance;
     
-    if (distance > 0.0) {
+    if (widget.enableFling && distance > 0.0) {
       _tmpPosX = _posX;
       _tmpPosY = _posY;
 
