@@ -1,8 +1,8 @@
 name: diagonal_scrollview
 description: A new Flutter package project.
 version: 0.0.1
-author:
-homepage:
+author: Ranfi Castillo de Aza
+homepage: https://github.com/RanfiCD/diagonal_scrollview
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
