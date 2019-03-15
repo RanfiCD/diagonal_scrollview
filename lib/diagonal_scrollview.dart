@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 /// A [Widget] that enables the scroll in both directions, horizontal and vertical.
 class DiagonalScrollView extends StatefulWidget {
   final Widget child;
+
   /// The maximum scroll alongside the 'x' axis.
   final double maxWidth;
+
   /// The maximum scroll alongside the 'y' axis.
   final double maxHeight;
+
   /// The signature for callbacks that report that the position has changed.
   /// The value received is the position of the top left corner of the child's [RenderBox] (0, 0).
-  /// 
+  ///
   /// The movement is constrained so that the (0, 0) point will not be visible.
   /// Therefore, the values emitted will be always negative or zero.
   final ValueChanged<Offset> onScroll;
@@ -21,14 +24,15 @@ class DiagonalScrollView extends StatefulWidget {
     this.maxHeight: double.infinity,
     this.onScroll,
     this.enableFling: true,
-  }): assert(maxWidth > 0), assert(maxHeight > 0);
+  })  : assert(maxWidth > 0),
+        assert(maxHeight > 0);
 
   @override
   _DiagonalScrollViewState createState() => _DiagonalScrollViewState();
 }
 
 class _DiagonalScrollViewState extends State<DiagonalScrollView>
-  with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   _DiagonalScrollViewState();
 
   double _posX = 0.0;
@@ -92,7 +96,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   void _handlePanEnd(DragEndDetails details) {
     Offset velocity = details.velocity.pixelsPerSecond;
     double distance = velocity.distance;
-    
+
     if (widget.enableFling && distance > 0.0) {
       _tmpPosX = _posX;
       _tmpPosY = _posY;
@@ -109,9 +113,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   void _handleFlingAnimation() {
     if (_animation != null && _animation.value.distance > 0.0) {
       Offset newPosition = _rectifyChildPosition(
-        _tmpPosX + _animation.value.dx,
-        _tmpPosY + _animation.value.dy
-      );
+          _tmpPosX + _animation.value.dx, _tmpPosY + _animation.value.dy);
 
       setState(() {
         _posX = newPosition.dx;
@@ -123,7 +125,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return GestureDetector(
       onPanDown: _handlePanDown,
       onPanUpdate: _handlePanUpdate,
