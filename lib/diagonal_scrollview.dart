@@ -45,7 +45,7 @@ class DiagonalScrollView extends StatefulWidget {
     this.maxWidth: double.infinity,
     this.maxHeight: double.infinity,
     @required this.child,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   _DiagonalScrollViewState createState() => _DiagonalScrollViewState();
@@ -64,7 +64,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   Offset _lastFocalPoint = Offset(0, 0);
   AnimationController _controller;
   Animation<Offset> _animation;
-  GlobalKey _positionedKey = GlobalKey();  
+  GlobalKey _positionedKey = GlobalKey();
 
   RenderBox get renderBox {
     return context.findRenderObject() as RenderBox;
@@ -108,7 +108,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
 
     if (widget.enableZoom) {
       newScale = _tmpScale * currentScale;
-      
+
       if (newScale < widget.minScale) {
         newScale = widget.minScale;
       } else if (newScale > widget.maxScale) {
@@ -122,19 +122,23 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   /// Returns the [Offset] applied to the child when zooming.
   Offset _getZoomFocusOffset(double scale) {
     Offset boxCenter = Offset(containerWidth, containerHeight) / 2;
-    Offset focusOffset = (boxCenter / scale).translate(-boxCenter.dx, -boxCenter.dy) * scale;
+    Offset focusOffset =
+        (boxCenter / scale).translate(-boxCenter.dx, -boxCenter.dy) * scale;
 
     return focusOffset;
   }
 
   /// Returns the constrained position of the child relative to the [RenderBox].
-  Offset _rectifyChildPosition({double scale, Offset position, Offset offset: const Offset(0, 0)}) {
+  Offset _rectifyChildPosition(
+      {double scale, Offset position, Offset offset: const Offset(0, 0)}) {
     Offset containerScaled = Offset(containerWidth, containerHeight) / scale;
     double x = position.dx;
     double y = position.dy;
 
-    if (x + offset.dx < containerScaled.dx - widget.maxWidth) x = containerScaled.dx - widget.maxWidth - offset.dx;
-    if (y + offset.dy < containerScaled.dy - widget.maxHeight) y = containerScaled.dy - widget.maxHeight - offset.dy;
+    if (x + offset.dx < containerScaled.dx - widget.maxWidth)
+      x = containerScaled.dx - widget.maxWidth - offset.dx;
+    if (y + offset.dy < containerScaled.dy - widget.maxHeight)
+      y = containerScaled.dy - widget.maxHeight - offset.dy;
 
     if (x + offset.dx > 0.0) x = -offset.dx;
     if (y + offset.dy > 0.0) y = -offset.dy;
@@ -147,7 +151,8 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     _lastFocalPoint = renderBox.globalToLocal(details.focalPoint);
     _controller.value = 0.0;
     _boxZoomOffset = _getZoomFocusOffset(_scale);
-    _position = _position.translate(-_boxZoomOffset.dx / _scale, -_boxZoomOffset.dy / _scale);
+    _position = _position.translate(
+        -_boxZoomOffset.dx / _scale, -_boxZoomOffset.dy / _scale);
 
     if (_controller.isAnimating) {
       _controller.stop();
@@ -172,7 +177,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
       _position = newPosition;
       _boxZoomOffset = newBoxZoomOffset;
     });
-    
+
     _emitScroll();
     if (_scale != newScale) {
       _emitScaleChanged();
@@ -183,7 +188,8 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     Offset velocity = details.velocity.pixelsPerSecond;
     double distance = velocity.distance;
 
-    _position = _position.translate(_boxZoomOffset.dx / _scale, _boxZoomOffset.dy / _scale);
+    _position = _position.translate(
+        _boxZoomOffset.dx / _scale, _boxZoomOffset.dy / _scale);
     _boxZoomOffset = Offset(0, 0);
 
     if (widget.enableFling && distance > 0.0) {
@@ -202,7 +208,8 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     if (_animation != null && _animation.value.distance > 0.0) {
       Offset newPosition = _rectifyChildPosition(
         scale: _scale,
-        position: _tmpPosition.translate(_animation.value.dx, _animation.value.dy),
+        position:
+            _tmpPosition.translate(_animation.value.dx, _animation.value.dy),
       );
 
       setState(() {
@@ -217,13 +224,15 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this)..addListener(_handleFlingAnimation);
+    _controller = AnimationController(vsync: this)
+      ..addListener(_handleFlingAnimation);
   }
 
   @override
   Widget build(BuildContext context) {
     Offset origin = Offset(positionedWidth, positionedHeight) / -2;
-    Offset position = (_position * _scale).translate(_boxZoomOffset.dx, _boxZoomOffset.dy);
+    Offset position =
+        (_position * _scale).translate(_boxZoomOffset.dx, _boxZoomOffset.dy);
 
     return GestureDetector(
       onScaleStart: _handleScaleStart,
