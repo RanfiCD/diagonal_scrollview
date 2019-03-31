@@ -1,3 +1,7 @@
+## [0.0.3]
+
+* NEW: Enable zooming.
+
 ## [0.0.2+2]
 
 Update README.md.
