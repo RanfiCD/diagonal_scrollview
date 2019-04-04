@@ -51,6 +51,8 @@ class MyApp extends StatelessWidget {
         title: Text(_appTitle),
       ),
       body: DiagonalScrollView(
+        enableFling: true,
+        enableZoom: true,
         maxHeight: _boxSize,
         maxWidth: _boxSize,
         child: Container(
