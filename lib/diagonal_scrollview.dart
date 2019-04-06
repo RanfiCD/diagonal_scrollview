@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// A [Widget] that enables the scroll in both directions, horizontal and vertical.
+/// Also allows the zooming. The width and height match those of the parent.
 class DiagonalScrollView extends StatefulWidget {
   /// Enable or disable the zoom animation.
   final bool enableZoom;
@@ -233,7 +234,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
       onScaleUpdate: _handleScaleUpdate,
       onScaleEnd: _handleScaleEnd,
       child: Container(
-        color: Colors.red,
+        color: Colors.transparent,
         child: Stack(
           children: <Widget>[
             Positioned(

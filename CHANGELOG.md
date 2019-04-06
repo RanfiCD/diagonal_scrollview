@@ -1,24 +1,28 @@
+## [0.0.4+1]
+
+* Fixed background color.
+
 ## [0.0.4]
 
-* New: Manage the fling animation velocity.
-* Improve fling animation.
+* Added manage the fling animation velocity.
+* Improved fling animation.
 
 ## [0.0.3]
 
-* NEW: Enable zooming.
+* Added enable zooming.
 
 ## [0.0.2+2]
 
-* Update README.md.
+* Updated README.md.
 
 ## [0.0.2+1]
 
-* Improve documentation.
+* Updated documentation.
 
 ## [0.0.2]
 
-* NEW: Enable or disable fling.
+* Added enable or disable fling.
 
 ## [0.0.1]
 
-* NEW: Initial release.
+* Initial release.
