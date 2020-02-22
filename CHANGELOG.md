@@ -1,3 +1,7 @@
+## [0.0.4+2]
+
+* Fixed onScaleChanged never called.
+
 ## [0.0.4+1]
 
 * Fixed background color.

@@ -93,18 +93,6 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     return positionedRenderBox?.size?.height ?? 0;
   }
 
-  void _emitScroll() {
-    if (widget.onScroll != null) {
-      widget.onScroll(_position);
-    }
-  }
-
-  void _emitScaleChanged() {
-    if (widget.onScaleChanged != null) {
-      widget.onScaleChanged(_scale);
-    }
-  }
-
   /// Returns the correct new scale of the child.
   double _getNewScale(double currentScale) {
     double newScale = 1.0;
@@ -131,7 +119,8 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   }
 
   /// Returns the constrained position of the child relative to the [RenderBox].
-  Offset _rectifyChildPosition({double scale, Offset position, Offset offset: const Offset(0, 0)}) {
+  Offset _rectifyChildPosition(
+      {double scale, Offset position, Offset offset: const Offset(0, 0)}) {
     Offset containerScaled = Offset(containerWidth, containerHeight) / scale;
     double x = position.dx;
     double y = position.dy;
@@ -161,6 +150,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
 
   void _handleScaleUpdate(ScaleUpdateDetails details) {
     double newScale = _getNewScale(details.scale);
+    bool scaleChanged = _scale != newScale;
     Offset focalPoint = renderBox.globalToLocal(details.focalPoint);
     Offset newBoxZoomOffset = _getZoomFocusOffset(newScale);
     Offset delta = focalPoint - _lastFocalPoint;
@@ -178,9 +168,9 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
       _boxZoomOffset = newBoxZoomOffset;
     });
 
-    _emitScroll();
-    if (_scale != newScale) {
-      _emitScaleChanged();
+    widget.onScroll?.call(_position);
+    if (scaleChanged) {
+      widget.onScaleChanged?.call(_scale);
     }
   }
 
@@ -212,7 +202,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
         _position = newPosition;
       });
 
-      _emitScroll();
+      widget.onScroll?.call(_position);
     }
   }
 
