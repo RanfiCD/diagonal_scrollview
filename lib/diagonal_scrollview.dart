@@ -134,11 +134,9 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
 
   /// Returns the constrained scale of the child.
   double _rectifyScale(double scale) {
-    if (scale < widget.minScale)
-      scale = widget.minScale;
-    if (scale > widget.maxScale)
-      scale = widget.maxScale;
-    
+    if (scale < widget.minScale) scale = widget.minScale;
+    if (scale > widget.maxScale) scale = widget.maxScale;
+
     return scale;
   }
 
@@ -216,7 +214,9 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   }
 
   void _handleFlingAnimation() {
-    if (_flingController.isAnimating && _flingAnimation != null && _flingAnimation.value.distance > 0) {
+    if (_flingController.isAnimating &&
+        _flingAnimation != null &&
+        _flingAnimation.value.distance > 0) {
       Offset newPosition = _rectifyChildPosition(
         scale: _scale,
         position: _position + _flingAnimation.value,
@@ -231,11 +231,15 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   }
 
   void _handleControllerAnimation() {
-    if (_controllerController.isAnimating && _controllerAnimation != null && _controllerAnimation.value > 0) {
-      double newScale = _controllerScale + _controllerScaleTarget * _controllerAnimation.value;
+    if (_controllerController.isAnimating &&
+        _controllerAnimation != null &&
+        _controllerAnimation.value > 0) {
+      double newScale = _controllerScale +
+          _controllerScaleTarget * _controllerAnimation.value;
       Offset newPosition = _rectifyChildPosition(
         scale: newScale,
-        position: _controllerPosition + _controllerPositionTarget * _controllerAnimation.value,
+        position: _controllerPosition +
+            _controllerPositionTarget * _controllerAnimation.value,
       );
       bool positionChanged = newPosition != _position;
       bool scaleChanged = newScale != _scale;
@@ -245,14 +249,13 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
         _position = newPosition;
       });
 
-      if (positionChanged)
-        widget.onScroll?.call(_position);
-      if (scaleChanged)
-        widget.onScaleChanged?.call(_scale);
+      if (positionChanged) widget.onScroll?.call(_position);
+      if (scaleChanged) widget.onScaleChanged?.call(_scale);
     }
   }
 
-  void _handleControllerTranslation(Offset newPosition, double newScale, bool animate) {
+  void _handleControllerTranslation(
+      Offset newPosition, double newScale, bool animate) {
     _controllerController.value = 0.0;
     if (_controllerController.isAnimating) {
       _controllerController.stop();
@@ -263,7 +266,8 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
       _controllerPosition = _position;
       _controllerScaleTarget = newScale - _scale;
       _controllerPositionTarget = newPosition - _position;
-      _controllerAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controllerController);
+      _controllerAnimation =
+          Tween<double>(begin: 0.0, end: 1.0).animate(_controllerController);
       _controllerController.fling(velocity: 1.0);
     } else {
       setState(() {

@@ -16,7 +16,6 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _MyAppState();
-  
 }
 
 class _MyAppState extends State<MyApp> {
@@ -25,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   final double _minScale = .3;
   final double _maxScale = 3;
   final Size _controlPanelSize = Size(250, 200);
-  final Size _controlPanelIconSize = Size(10 ,10);
+  final Size _controlPanelIconSize = Size(10, 10);
 
   DiagonalScrollViewController _controller;
   DiagonalScrollViewController _controlPanelController;
@@ -33,9 +32,8 @@ class _MyAppState extends State<MyApp> {
 
   Offset _rectifyControlPanelPosition(Offset position) {
     return Offset(
-      position.dx + _controlPanelSize.width - _controlPanelIconSize.width,
-      position.dy + _controlPanelSize.height - _controlPanelIconSize.height
-    );
+        position.dx + _controlPanelSize.width - _controlPanelIconSize.width,
+        position.dy + _controlPanelSize.height - _controlPanelIconSize.height);
   }
 
   Offset _getControlPanelProgress(Offset position) {
@@ -43,9 +41,7 @@ class _MyAppState extends State<MyApp> {
     Offset rectifiedPosition = _rectifyControlPanelPosition(position);
 
     return Offset(
-      rectifiedPosition.dx / boxSize.dx,
-      rectifiedPosition.dy / boxSize.dy
-    );
+        rectifiedPosition.dx / boxSize.dx, rectifiedPosition.dy / boxSize.dy);
   }
 
   List<Widget> _getChildren() {
@@ -66,10 +62,7 @@ class _MyAppState extends State<MyApp> {
           child: Center(
             child: Text(
               (cubeId++).toString(),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30
-              ),
+              style: TextStyle(color: Colors.white, fontSize: 30),
             ),
           ),
         );
@@ -132,51 +125,44 @@ class _MyAppState extends State<MyApp> {
               child: DiagonalScrollView(
                 minScale: 1,
                 maxScale: 1,
-                maxWidth: _controlPanelSize.width * 2 - _controlPanelIconSize.width,
-                maxHeight: _controlPanelSize.height * 2 - _controlPanelIconSize.height,
+                maxWidth:
+                    _controlPanelSize.width * 2 - _controlPanelIconSize.width,
+                maxHeight:
+                    _controlPanelSize.height * 2 - _controlPanelIconSize.height,
                 onCreated: (DiagonalScrollViewController controller) {
                   Offset offset = Offset(
-                    _controlPanelSize.width - _controlPanelIconSize.width,
-                    _controlPanelSize.height - _controlPanelIconSize.height
-                  );
+                      _controlPanelSize.width - _controlPanelIconSize.width,
+                      _controlPanelSize.height - _controlPanelIconSize.height);
 
                   _controlPanelController = controller;
-                  _controlPanelController.moveTo(
-                    location: -offset
-                  );
+                  _controlPanelController.moveTo(location: -offset);
                 },
                 onScroll: (Offset offset) {
                   Offset progress = _getControlPanelProgress(offset);
                   Size childSize = _controller.getChildSize();
 
                   _controller.moveTo(
-                    scale: _currentScale,
-                    location: -Offset(
-                      childSize.width * progress.dx,
-                      childSize.height * progress.dy
-                    )
-                  );
+                      scale: _currentScale,
+                      location: -Offset(childSize.width * progress.dx,
+                          childSize.height * progress.dy));
                 },
                 child: Container(
-                  height: _controlPanelSize.height,
-                  width: _controlPanelSize.width,
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          width: _controlPanelIconSize.width,
-                          height: _controlPanelIconSize.height,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle
+                    height: _controlPanelSize.height,
+                    width: _controlPanelSize.width,
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                            width: _controlPanelIconSize.width,
+                            height: _controlPanelIconSize.height,
+                            decoration: BoxDecoration(
+                                color: Colors.red, shape: BoxShape.circle),
                           ),
-                        ),
-                      )
-                    ],
-                  )
-                ),
+                        )
+                      ],
+                    )),
               ),
             ),
           ),
@@ -184,35 +170,31 @@ class _MyAppState extends State<MyApp> {
             right: 4,
             bottom: 4,
             child: Container(
-              height: 200,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.black
-                )
-              ),
-              child: FittedBox(
-                child: RotatedBox(
-                  quarterTurns: -1,
-                  child: Slider(
-                    min: _minScale,
-                    max: _maxScale,
-                    value: _currentScale,
-                    onChanged: (double val) {
-                      _controller.moveTo(
-                        scale: val,
-                        location: _controller.getPosition(),
-                      );
+                height: 200,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black)),
+                child: FittedBox(
+                  child: RotatedBox(
+                    quarterTurns: -1,
+                    child: Slider(
+                      min: _minScale,
+                      max: _maxScale,
+                      value: _currentScale,
+                      onChanged: (double val) {
+                        _controller.moveTo(
+                          scale: val,
+                          location: _controller.getPosition(),
+                        );
 
-                      setState(() {
-                        _currentScale = val;
-                      });
-                    },
+                        setState(() {
+                          _currentScale = val;
+                        });
+                      },
+                    ),
                   ),
-                ),
-              )
-            ),
+                )),
           )
         ],
       ),
