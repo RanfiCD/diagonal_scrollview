@@ -1,3 +1,7 @@
+## [0.0.5]
+
+* Add controller.
+
 ## [0.0.4+2]
 
 * Fixed onScaleChanged never called.
