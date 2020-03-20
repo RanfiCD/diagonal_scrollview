@@ -118,9 +118,6 @@ class _MyAppState extends State<MyApp> {
               width: _controlPanelSize.width,
               decoration: BoxDecoration(
                 color: Colors.grey[400],
-                // border: Border.all(
-                //   color: Colors.black,
-                // )
               ),
               child: DiagonalScrollView(
                 minScale: 1,
@@ -135,7 +132,7 @@ class _MyAppState extends State<MyApp> {
                       _controlPanelSize.height - _controlPanelIconSize.height);
 
                   _controlPanelController = controller;
-                  _controlPanelController.moveTo(location: -offset);
+                  _controlPanelController.moveTo(location: offset);
                 },
                 onScroll: (Offset offset) {
                   Offset progress = _getControlPanelProgress(offset);
@@ -143,7 +140,7 @@ class _MyAppState extends State<MyApp> {
 
                   _controller.moveTo(
                       scale: _currentScale,
-                      location: -Offset(childSize.width * progress.dx,
+                      location: Offset(childSize.width * progress.dx,
                           childSize.height * progress.dy));
                 },
                 child: Container(

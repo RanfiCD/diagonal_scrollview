@@ -282,7 +282,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     double newScale = _rectifyScale(scale);
     Offset newPosition = _rectifyChildPosition(
       scale: newScale,
-      position: location,
+      position: -location,
     );
 
     _handleControllerTranslation(newPosition, newScale, animate);
@@ -293,7 +293,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     double newScale = _rectifyScale(_scale + scale);
     Offset newPosition = _rectifyChildPosition(
       scale: newScale,
-      position: _position + offset,
+      position: _position - offset,
     );
 
     _handleControllerTranslation(newPosition, newScale, animate);
