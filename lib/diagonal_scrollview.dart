@@ -320,7 +320,9 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     _controllerController = AnimationController(vsync: this)
       ..addListener(_handleControllerAnimation);
 
-    widget.onCreated?.call(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onCreated?.call(this);
+    });
   }
 
   @override

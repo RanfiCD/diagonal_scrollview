@@ -1,3 +1,7 @@
+## [0.1.0+1]
+
+* Fixed call onCreated after layout.
+
 ## [0.1.0]
 
 * **Breaking Change**: use positive units on controller.

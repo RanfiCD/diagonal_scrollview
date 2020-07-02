@@ -1,6 +1,6 @@
 # Diagonal ScrollView for Flutter
 
-[![pub package](https://img.shields.io/badge/pub-v0.1.0-orange.svg)](https://pub.dartlang.org/packages/diagonal_scrollview)
+[![pub package](https://img.shields.io/badge/pub-v0.1.0+1-orange.svg)](https://pub.dartlang.org/packages/diagonal_scrollview)
 
 A [Flutter](https://flutter.dev/) package that allows to scroll in both, horizontal and vertical direction, as well as zooming.
 
