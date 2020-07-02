@@ -4,4 +4,4 @@ description: Demonstrates how to use the diagonal_scrollview plugin.
 dependencies:
   flutter:
     sdk: flutter
-  diagonal_scrollview: ^0.1.0+1
+  diagonal_scrollview: ^0.1.0+2

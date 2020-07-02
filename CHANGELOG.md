@@ -1,3 +1,7 @@
+## [0.1.0+2]
+
+* Fixed channel stable.
+
 ## [0.1.0+1]
 
 * Fixed call onCreated after layout.

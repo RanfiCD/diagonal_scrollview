@@ -1,6 +1,6 @@
 name: diagonal_scrollview
 description: A Flutter package project to enable the scrolling over both, the vertical and horizontal axis at the same time, as well as zooming.
-version: 0.1.0+1
+version: 0.1.0+2
 homepage: https://github.com/RanfiCD/diagonal_scrollview
 
 environment:
