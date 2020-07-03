@@ -87,12 +87,9 @@ class _MyAppState extends State<MyApp> {
       body: Stack(
         children: <Widget>[
           DiagonalScrollView(
-            enableFling: true,
             enableZoom: true,
             minScale: _minScale,
             maxScale: _maxScale,
-            maxHeight: _boxSize,
-            maxWidth: _boxSize,
             onCreated: (DiagonalScrollViewController controller) {
               _controller = controller;
             },
@@ -126,6 +123,7 @@ class _MyAppState extends State<MyApp> {
                     _controlPanelSize.width * 2 - _controlPanelIconSize.width,
                 maxHeight:
                     _controlPanelSize.height * 2 - _controlPanelIconSize.height,
+                maxSizeFromChild: false,
                 onCreated: (DiagonalScrollViewController controller) {
                   Offset offset = Offset(
                       _controlPanelSize.width - _controlPanelIconSize.width,

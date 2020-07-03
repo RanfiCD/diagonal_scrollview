@@ -13,13 +13,14 @@ class DiagonalScrollView extends StatefulWidget {
   final bool enableFling;
 
   /// The signature for callbacks that report that the position has changed.
-  /// The value received is the position of the top left corner of the child's [RenderBox] (0, 0).
   ///
+  /// The value received is the position of the top left corner of the child's [RenderBox] (0, 0).
   /// The movement is constrained so that the (0, 0) point will not be visible.
   /// Therefore, the values emitted will be always negative or zero.
   final ValueChanged<Offset> onScroll;
 
   /// The signature for callbacks that report that the scale has changed.
+  ///
   /// The value received is the scale by which the child is displayed on the [RenderBox].
   final ValueChanged<double> onScaleChanged;
 
@@ -30,10 +31,17 @@ class DiagonalScrollView extends StatefulWidget {
   final double maxScale;
 
   /// The maximum scroll alongside the 'x' axis.
+  ///
+  /// Ignored if [maxSizeFromChild] is true.
   final double maxWidth;
 
   /// The maximum scroll alongside the 'y' axis.
+  ///
+  /// Ignored if [maxSizeFromChild] is true.
   final double maxHeight;
+
+  /// Uses the child's size to set the maximum scroll alongside the axis.
+  final bool maxSizeFromChild;
 
   /// The percentage of the animation's velocity used as the actual velocity.
   final double flingVelocityReduction;
@@ -54,6 +62,7 @@ class DiagonalScrollView extends StatefulWidget {
     this.maxScale: 3.0,
     this.maxWidth: double.infinity,
     this.maxHeight: double.infinity,
+    this.maxSizeFromChild: true,
     this.flingVelocityReduction: 0.02,
     this.onCreated,
     @required this.child,
@@ -146,11 +155,20 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     Offset containerScaled = Offset(containerWidth, containerHeight) / scale;
     double x = position.dx;
     double y = position.dy;
+    double maxWidth = widget.maxWidth;
+    double maxHeight = widget.maxHeight;
 
-    if (x + offset.dx < containerScaled.dx - widget.maxWidth)
-      x = containerScaled.dx - widget.maxWidth - offset.dx;
-    if (y + offset.dy < containerScaled.dy - widget.maxHeight)
-      y = containerScaled.dy - widget.maxHeight - offset.dy;
+    if (widget.maxSizeFromChild) {
+      Size size = getChildSize();
+
+      maxWidth = size.width;
+      maxHeight = size.height;
+    }
+
+    if (x + offset.dx < containerScaled.dx - maxWidth)
+      x = containerScaled.dx - maxWidth - offset.dx;
+    if (y + offset.dy < containerScaled.dy - maxHeight)
+      y = containerScaled.dy - maxHeight - offset.dy;
 
     if (x + offset.dx > 0.0) x = -offset.dx;
     if (y + offset.dy > 0.0) y = -offset.dy;

@@ -1,3 +1,7 @@
+## [0.2.0]
+
+* **Breaking Change**: take maxWidth and maxHeight automatically from the child's size.
+
 ## [0.1.0+2]
 
 * Fixed channel stable.
