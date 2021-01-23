@@ -1,3 +1,7 @@
+## [0.2.0+1]
+
+* Discontinue package in favor of [InteractiveViewer](https://api.flutter.dev/flutter/widgets/InteractiveViewer-class.html).
+
 ## [0.2.0]
 
 * **Breaking Change**: take maxWidth and maxHeight automatically from the child's size.
