@@ -3,12 +3,17 @@
 
 .packages
 .pub/
+.idea/
+.metadata
 
+android
 build/
 ios/.generated/
 ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
+example/android/local.properties
 
+pubspec.lock
 example/pubspec.lock
 example/ios/Flutter/Generated.xcconfig
 example/ios/Flutter/flutter_export_environment.sh
